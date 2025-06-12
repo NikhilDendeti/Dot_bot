@@ -1,7 +1,8 @@
 openai
 langchain
+langchain-openai
 pymupdf
-chromadb
+faiss-cpu
 tiktoken
 streamlit
 unstructured
