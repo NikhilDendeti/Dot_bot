@@ -2,8 +2,10 @@ import streamlit as st
 from dotenv import load_dotenv
 import os
 
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OpenAIEmbeddings
+
+
+from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
@@ -12,7 +14,7 @@ load_dotenv()
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 embedding = OpenAIEmbeddings()
-vectorstore = Chroma(persist_directory="./gdot_vectorstore", embedding_function=embedding)
+vectorstore = FAISS.load_local("./gdot_vectorstore", embedding, allow_dangerous_deserialization=True)
 retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
 
 prompt_template = PromptTemplate(
