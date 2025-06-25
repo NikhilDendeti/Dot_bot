@@ -6,3 +6,5 @@ tiktoken
 streamlit
 unstructured
 python-dotenv
+langchain-openai
+pandas
